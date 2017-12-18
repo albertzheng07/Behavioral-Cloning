@@ -19,8 +19,7 @@ for line in lines[1:]:
 	filename = source_path.split('/')[-1] # get filename from path
 	curr_path = '../data/IMG/' + filename
 	image = cv2.imread(curr_path)
-	images.append(images)
-	#print(line)
+	images.append(image)
 	measurements.append(float(line[3]))
 
 X_train = np.array(images)
