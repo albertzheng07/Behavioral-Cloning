@@ -2,7 +2,9 @@ import csv
 import cv2
 import numpy as np
 from keras.models import Sequential
-from keras.layers import Flatten, Dense
+from keras.layers import Flatten, Dense, Lambda, Activation
+from keras.layers.convolutional import Convolution2D
+from keras.layers.pooling import MaxPooling2D
 
 lines = []
 # open up csv file which contains driving logs
@@ -26,9 +28,17 @@ X_train = np.array(images)
 y_train = np.array(measurements)
 
 model = Sequential() # build sequential model
-model.add(Flatten(input_shape=(160,320,3))) # flatten input into single array
+model.add(Lambda(lambda x: x/255-0.5,input_shape=(160,320,3)))
+model.add(Convolution2D(6,5,5,activation="relu"))
+model.add(MaxPooling2D())
+model.add(Convolution2D(6,5,5,activation="relu"))
+model.add(MaxPooling2D())
+model.add(Flatten()) # flatten input into single array
+model.add(Dense(120)) 
+model.add(Dense(84)) 
 model.add(Dense(1)) # single dimensionality since input is flattened to N X 1 array
 
 model.compile(loss='mse',optimizer='adam')
 model.fit(X_train,y_train,validation_split=0.2,shuffle=True,nb_epoch=7)
 model.save('model_test')
+exit()
