@@ -17,7 +17,7 @@ with open('../data/driving_log.csv') as csvfile:
 images = []
 measurements = []
 
-use_NN_arch = 0 # set 0 for LeNet baseline, set 1 for Nvidia
+use_NN_arch = 1 # set 0 for LeNet baseline, set 1 for Nvidia
 
 def get_image_path(source_path):
 	filename = source_path.split('/')[-1] # get filename from path
@@ -26,7 +26,7 @@ def get_image_path(source_path):
 
 correction_factor = [0.0,0.3,-0.3]
 
-for line in lines[1:2]:
+for line in lines[1:11]:
 	for ind in range(3):
 		img_path = get_image_path(line[ind])
 		image = cv2.imread(img_path)
