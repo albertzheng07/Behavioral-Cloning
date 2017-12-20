@@ -24,9 +24,9 @@ def get_image_path(source_path):
 	curr_path = '../data/IMG/' + filename
 	return curr_path
 
-correction_factor = [0.0,0.3,-0.3]
+correction_factor = [0.0,0.2,-0.2]
 
-for line in lines[1:11]:
+for line in lines[1:]:
 	for ind in range(3):
 		img_path = get_image_path(line[ind])
 		image = cv2.imread(img_path)
@@ -67,9 +67,10 @@ elif(use_NN_arch == 1):
 	model.add(Dense(100)) 
 	model.add(Dense(50)) 
 	model.add(Dense(10)) 
+	model.add(Dense(1))	
 
 model.compile(loss='mse',optimizer='adam')
-model.fit(X_train,y_train,validation_split=0.2,shuffle=True,nb_epoch=1)
+model.fit(X_train,y_train,validation_split=0.2,shuffle=True,nb_epoch=2)
 
 
 model.save('model_test')
