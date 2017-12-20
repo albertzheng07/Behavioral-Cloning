@@ -5,7 +5,7 @@ from keras.models import Sequential
 from keras.layers import Flatten, Dense, Lambda, Activation, Cropping2D
 from keras.layers.convolutional import Convolution2D
 from keras.layers.pooling import MaxPooling2D
-import ipdb
+#import ipdb
 
 lines = []
 # open up csv file which contains driving logs
