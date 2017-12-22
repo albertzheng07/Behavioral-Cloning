@@ -9,7 +9,7 @@ from keras.layers.pooling import MaxPooling2D
 
 lines = []
 # open up csv file which contains driving logs
-with open('../test_data/driving_log.csv') as csvfile:
+with open('../test_track2/driving_log.csv') as csvfile:
 	reader = csv.reader(csvfile)
 	for line in reader: 
 		lines.append(line) # append in each line of csv data into list
@@ -21,7 +21,7 @@ use_NN_arch = 1 # set 0 for LeNet baseline, set 1 for Nvidia
 
 def get_image_path(source_path):
 	filename = source_path.split('/')[-1] # get filename from path
-	curr_path = '../test_data/IMG/' + filename
+	curr_path = '../test_track2/IMG/' + filename
 	return curr_path
 
 correction_factor = [0.0,0.2,-0.2]
@@ -70,8 +70,8 @@ elif(use_NN_arch == 1):
 	model.add(Dense(1))	
 
 model.compile(loss='mse',optimizer='adam')
-model.fit(X_train,y_train,validation_split=0.2,shuffle=True,nb_epoch=2)
+model.fit(X_train,y_train,validation_split=0.2,shuffle=True,nb_epoch=3)
 
 
-model.save('model_test')
+model.save('model_track2')
 exit()
