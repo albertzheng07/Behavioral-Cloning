@@ -15,11 +15,11 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./examples/placeholder.png "Model Visualization"
-[image2]: ./examples/placeholder.png "Grayscaling"
+[image2]: ./examples/placeholder.png "Center Lane Driving"
 [image3]: ./examples/placeholder_small.png "Recovery Image"
 [image4]: ./examples/placeholder_small.png "Recovery Image"
 [image5]: ./examples/placeholder_small.png "Recovery Image"
-[image6]: ./examples/placeholder_small.png "Normal Image"
+[image6]: ./examples/placeholder_small.png "Baseline Image"
 [image7]: ./examples/placeholder_small.png "Flipped Image"
 
 ## Rubric Points
@@ -103,12 +103,32 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 #### 2. Final Model Architecture
 
-The final model architecture (train_model.py lines 18-24) consisted of a convolution neural network with the following layers and layer sizes ...
+The final model architecture (train_model.py lines 70-82) consisted of a convolution neural network.
 
 
-Here is a visualization of the architecture (note: visualizing the architecture is optional according to the project rubric)
 
-<!-- insert table -->
+My final model is based on the Nvidia Architecture which consisted of the following layers:
+
+| Layer         		|     Description	        					|
+|:---------------------:|:---------------------------------------------:|
+| Input         		| 160x320x3 RGB  image   							|
+| Normalization     | Normalize between [-0.5,0.5]							|
+| Cropping     | Crop out Top 75 pixels and Bottom 25 pixels, 60 x 320 x 3 RGB image	|
+| Convolution 5x5     	| 24 filters, 5x5 stride, outputs NxNxN |
+| RELU					|												|
+| Convolution 5x5     	| 36 filters, 5x5 stride, outputs NxNxN |
+| RELU					|												|
+| Convolution 5x5     	| 48 filters, 5x5 stride, outputs NxNxN |
+| RELU					|												|
+| Convolution 5x5     	| 64 filters, 5x5 stride, outputs NxNxN |
+| RELU					|												|
+| Convolution 5x5     	| 64 filters, 5x5 stride, outputs NxNxN |
+| RELU					|												|
+| Flatten				|     Output XXXX   									|
+|	Fully Connected					|		Output 100										|
+|	Fully Connected					|					Output 50							|
+|	Fully Connected					|					Output 10							|
+|	Fully Connected					|					Output 1						|
 
 #### 3. Creation of the Training Set & Training Process
 
@@ -121,8 +141,6 @@ I then recorded the vehicle recovering from the left side and right sides of the
 ![alt text][image3]
 ![alt text][image4]
 ![alt text][image5]
-
-Then I repeated this process on track two in order to get more data points.
 
 To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
 
