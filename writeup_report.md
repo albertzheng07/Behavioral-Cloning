@@ -52,7 +52,7 @@ The model_train.py file contains the code for training and saving the convolutio
 
 A deep convolutional neural network has been implemented using Keras which mimics the Nvidia deep neural network. It employs 5 convolutional 2 d layers with 4 different filters sizes.
 
-The convolution layers are in sequential order and did not require drop out layers in between each for the final result. The ordering and size of the convolutional layers can be seen in Lines 61-65 as seen below.
+The convolution layers are in sequential order and did not require drop out layers in between each for the final result. The ordering and size of the convolutional layers can be seen in Lines 74-78 as seen below.
 
 ```
 model.add(Convolution2D(24,5,5,subsample=(2,2),activation="relu"))
@@ -154,12 +154,12 @@ My next step was to then record the vehicle recovering from the left side and ri
 ![alt text][image4]
 ![alt text][image5]
 
-In order to augment the data set, I also flipped images thinking that this would provide additional angles for the network to train on. Here is an example of a baseline images vs. a flipped image.
+In order to augment the data set, I also flipped images thinking that this would provide additional angles for the network to train on. Here is an example of a nominal images vs. a flipped image.
 
-Baseline:
+Nominal
 ![alt text][image6]
 
-Flipped:
+Flipped
 ![alt text][image7]
 
 After the collection process, I had 5097 number of data points. I then preprocessed this data by adding the left and right images, and flipping all images. This resulted in a total of 30582 images.
