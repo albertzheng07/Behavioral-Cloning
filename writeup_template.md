@@ -16,9 +16,9 @@ The goals / steps of this project are the following:
 
 [image1]: ./examples/placeholder.png "Model Visualization"
 [image2]: ./examples/2017_12_22_20_54_08_104.jpg "Center Lane Driving"
-[image3]: ./examples/IMG/center_2017_12_22_19_07_01_251.jpg "Recovery Image 1"
-[image4]: ./examples/IMG/center_2017_12_22_19_07_01_613.jpg "Recovery Image 2"
-[image5]: ./examples/IMG/center_2017_12_22_19_07_02_059.jpg "Recovery Image 3"
+[image3]: ./examples/center_2017_12_22_19_07_01_251.jpg "Recovery Image 1"
+[image4]: ./examples/center_2017_12_22_19_07_01_613.jpg "Recovery Image 2"
+[image5]: ./examples/center_2017_12_22_19_07_02_059.jpg "Recovery Image 3"
 [image6]: ./examples/baseline_img.jpg "Baseline Image"
 [image7]: ./examples/flipped_img.jpg "Flipped Image"
 
