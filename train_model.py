@@ -19,6 +19,7 @@ measurements = []
 
 use_NN_arch = 1 # set 0 for LeNet baseline, set 1 for Nvidia
 print_ex = False
+print_shapes = False
 save_model = True
 run_model = True
 
@@ -80,6 +81,14 @@ if run_model:
 		model.add(Dense(50))  # fully connected layer with output of 50
 		model.add(Dense(10))  # fully connected layer with output of 10
 		model.add(Dense(1))	 # fully connected layer with output of 1
+
+	# Print output layer shapes
+	if print_shapes:
+	print("Output Layer Shapes \n")
+	outputs = [layer.output_shape for layer in model.layers]
+	for ind, out in enumerate(outputs):
+		print("layer %d",ind)
+		print("shape = \n", out) 
 
 	model.compile(loss='mse',optimizer='adam') # set mse loss function with adam optimizer
 	model.fit(X_train,y_train,validation_split=0.2,shuffle=True,nb_epoch=3) # call fit function with training data and use 20% of data as validation data, shuffle data and run n epochs

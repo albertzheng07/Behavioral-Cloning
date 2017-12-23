@@ -81,7 +81,7 @@ The following strategies were used:
 
 #### 1. Solution Design Approach
 
-The overall strategy for deriving a model architecture was to ...
+The overall strategy for deriving a model architecture was as follows:
 
 1. The first step was to use a convolution neural network model which is based on LeNet. Since Lenet has proven well in the past on classifying image data, I thought it was an appropriate baseline model.
 
@@ -119,25 +119,24 @@ model.add(Dense(10))  # fully connected layer with output of 10
 model.add(Dense(1))	 # fully connected layer with output of 1
 ```
 
-
 My final model is based on the Nvidia Architecture which consisted of the following layers:
 
 | Layer         		|     Description	        					|
 |:---------------------:|:---------------------------------------------:|
 | Input         		| 160x320x3 RGB  image   							|
 | Normalization     | Normalize between [-0.5,0.5]							|
-| Cropping     | Crop out Top 75 pixels and Bottom 25 pixels, 60 x 320 x 3 RGB image	|
-| Convolution 5x5     	| 24 filters, 5x5 stride, outputs NxNxN |
+| Cropping     | Crop out Top 75 pixels and Bottom 25 pixels, 65 x 320 x 3 RGB image	|
+| Convolution 5x5     	| 24 filters, 5x5 stride, outputs 31158x24 |
 | RELU					|												|
-| Convolution 5x5     	| 36 filters, 5x5 stride, outputs NxNxN |
+| Convolution 5x5     	| 36 filters, 5x5 stride, outputs 14x77x36 |
 | RELU					|												|
-| Convolution 5x5     	| 48 filters, 5x5 stride, outputs NxNxN |
+| Convolution 5x5     	| 48 filters, 5x5 stride, outputs 5x37x48 |
 | RELU					|												|
-| Convolution 5x5     	| 64 filters, 5x5 stride, outputs NxNxN |
+| Convolution 5x5     	| 64 filters, 5x5 stride, outputs 3x35x64 |
 | RELU					|												|
-| Convolution 5x5     	| 64 filters, 5x5 stride, outputs NxNxN |
+| Convolution 5x5     	| 64 filters, 5x5 stride, outputs 1x33x64 |
 | RELU					|												|
-| Flatten				|     Output XXXX   									|
+| Flatten				|     Output 2112   									|
 |	Fully Connected					|		Output 100										|
 |	Fully Connected					|					Output 50							|
 |	Fully Connected					|					Output 10							|
@@ -145,11 +144,11 @@ My final model is based on the Nvidia Architecture which consisted of the follow
 
 #### 3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. I did these in both the clockwise and counter clockwise directions. Here is an example image of center lane driving:
+In order to capture good driving behavior, I first recorded two laps on track one using nominal center lane driving where I would not deviate from the center of the road. I did recorded each lap in both the clockwise and counter clockwise directions. Here is an example image of center lane driving:
 
 ![alt text][image2]
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to .... These images show what a recovery looks like starting from ... :
+My next step was to then record the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to correct itself if there was deviation from the center of the road. These images show what a recovery will look like when heading towards the side of the road:
 
 ![alt text][image3]
 ![alt text][image4]
