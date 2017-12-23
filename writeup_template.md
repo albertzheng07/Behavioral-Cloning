@@ -19,8 +19,8 @@ The goals / steps of this project are the following:
 [image3]: ./examples/placeholder_small.png "Recovery Image"
 [image4]: ./examples/placeholder_small.png "Recovery Image"
 [image5]: ./examples/placeholder_small.png "Recovery Image"
-[image6]: ./examples/placeholder_small.png "Baseline Image"
-[image7]: ./examples/placeholder_small.png "Flipped Image"
+[image6]: ./examples/baseline_img.jpg "Baseline Image"
+[image7]: ./examples/flipped_img.jpg "Flipped Image"
 
 ## Rubric Points
 ### Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/432/view) individually and describe how I addressed each point in my implementation.  
@@ -105,6 +105,21 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 The final model architecture (train_model.py lines 70-82) consisted of a convolution neural network.
 
+```
+model = Sequential() # build sequential model of Nvidia NN
+model.add(Lambda(lambda x: x/255-0.5,input_shape=(160,320,3)))
+model.add(Cropping2D(cropping=((70,25),(0,0)))) # crop out the top 75 pixels, bottom 25 pixels, none n the outside
+model.add(Convolution2D(24,5,5,subsample=(2,2),activation="relu")) # 1st conv layer of 24 filters, 5x5 stride, relu activation
+model.add(Convolution2D(36,5,5,subsample=(2,2),activation="relu")) # 2nd conv layer of 36 filters, 5x5 stride, relu activation
+model.add(Convolution2D(48,5,5,subsample=(2,2),activation="relu")) # 3rd conv layer of 48 filters, 5x5 stride, relu activation
+model.add(Convolution2D(64,3,3,activation="relu")) # 4th conv layer of 64 filters, 3x3 stride, relu activation
+model.add(Convolution2D(64,3,3,activation="relu")) # 5th conv layer of 64 filters, 3x3 stride, relu activation
+model.add(Flatten()) # flatten input into single array
+model.add(Dense(100)) # fully connected layer with output of 100
+model.add(Dense(50))  # fully connected layer with output of 50
+model.add(Dense(10))  # fully connected layer with output of 10
+model.add(Dense(1))	 # fully connected layer with output of 1
+```
 
 
 My final model is based on the Nvidia Architecture which consisted of the following layers:
@@ -142,9 +157,14 @@ I then recorded the vehicle recovering from the left side and right sides of the
 ![alt text][image4]
 ![alt text][image5]
 
-To augment the data sat, I also flipped images and angles thinking that this would ... For example, here is an image that has then been flipped:
+In order to augment the data set, I also flipped images thinking that this would provide additional angles for the network to train on. Here is an example of a baseline images vs. a flipped image.
 
-Etc ....
+Baseline:
+![alt text][image6]
+
+Flipped:
+![alt text][image7]
+
 
 After the collection process, I had X number of data points. I then preprocessed this data by ...
 
