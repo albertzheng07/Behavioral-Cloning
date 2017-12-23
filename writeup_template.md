@@ -15,10 +15,10 @@ The goals / steps of this project are the following:
 [//]: # (Image References)
 
 [image1]: ./examples/placeholder.png "Model Visualization"
-[image2]: ./examples/placeholder.png "Center Lane Driving"
-[image3]: ./examples/placeholder_small.png "Recovery Image"
-[image4]: ./examples/placeholder_small.png "Recovery Image"
-[image5]: ./examples/placeholder_small.png "Recovery Image"
+[image2]: ./examples/2017_12_22_20_54_08_104.jpg "Center Lane Driving"
+[image3]: ./examples/IMG/center_2017_12_22_19_07_01_251.jpg "Recovery Image 1"
+[image4]: ./examples/IMG/center_2017_12_22_19_07_01_613.jpg "Recovery Image 2"
+[image5]: ./examples/IMG/center_2017_12_22_19_07_02_059.jpg "Recovery Image 3"
 [image6]: ./examples/baseline_img.jpg "Baseline Image"
 [image7]: ./examples/flipped_img.jpg "Flipped Image"
 
@@ -34,7 +34,7 @@ My project includes the following files:
 * train_model.py containing the script to create and train the neural network model
 * drive.py for driving the car in autonomous mode
 * model_track1 contains a trained convolution neural network which drives autonomously on the easier track 1
-* writeup_report.md or writeup_report.pdf summarizing the results
+* writeup_report.md summarizing the results
 
 #### 2. Submission includes functional code
 Using the Udacity provided simulator and my drive.py file, the car can be driven autonomously around the track by executing
@@ -83,23 +83,21 @@ The following strategies were used:
 
 The overall strategy for deriving a model architecture was to ...
 
-1. My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
+1. The first step was to use a convolution neural network model which is based on LeNet. Since Lenet has proven well in the past on classifying image data, I thought it was an appropriate baseline model.
 
-2.
+2. In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I then evaluated how well the model was minimizing the loss function output from the fitting.
 
-3.
+3. The next step was to run the simulator to see how well the car was driving around track one. I found quickly that the car quickly diverged off the track.
 
-4.
+4. I then attempted to increase the data augmentation by flipping images, adding more images at different view points and providing more data sets where the vehicle would correct back to center when drifting away the road.
 
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting.
+5. I found that LeNet was not successful in completing the autonomous lap even when providing the model with augmented data. I decided next to attempt a more powerful
+network with more convolutional layers.
 
-To combat the overfitting, I modified the model so that ...
+6. I selected the Nvidia neural network as the deeper neural net Architecture
+since this was a proven model with success on actual vehicles.
 
-Then I ...
-
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
-
-At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
+7. In the end, I found that the more powerful network was able drive the lap on the same dataset and decided to use the Nvidia architecture as my design architecture.
 
 #### 2. Final Model Architecture
 
@@ -147,7 +145,7 @@ My final model is based on the Nvidia Architecture which consisted of the follow
 
 #### 3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+To capture good driving behavior, I first recorded two laps on track one using center lane driving. I did these in both the clockwise and counter clockwise directions. Here is an example image of center lane driving:
 
 ![alt text][image2]
 
@@ -165,9 +163,8 @@ Baseline:
 Flipped:
 ![alt text][image7]
 
+After the collection process, I had 5097 number of data points. I then preprocessed this data by adding the left and right images, and flipping all images. This resulted in a total of 30582 images.
 
-After the collection process, I had X number of data points. I then preprocessed this data by ...
+I finally randomly shuffled the data set and put 20% of the data into a validation set.
 
-I finally randomly shuffled the data set and put Y% of the data into a validation set.
-
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as evidenced by the loss function. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 3 as evidenced by the loss function.
